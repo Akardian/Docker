@@ -14,8 +14,8 @@ services:
       WEBPASSWORD: 'run/secrets/pi-hole'
       # Volumes store your data between container upgrades
     volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+      - 'etc-pihole:/etc/pihole'
+      - 'etc-dnsmasq.d:/etc/dnsmasq.d'
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     deploy:
       restart_policy:
@@ -30,3 +30,6 @@ networks:
 secrets:
   pi-hole:
     external: true
+volumes:
+  etc-pihole:
+  etc-dnsmasq.d:
