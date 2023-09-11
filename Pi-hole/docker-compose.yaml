@@ -11,7 +11,7 @@ services:
       - "80:80/tcp"
     environment:
       TZ: 'Berlin/Germany'
-      WEBPASSWORD: /run/secrets/pi-hole
+      WEBPASSWORD: secret
       # Volumes store your data between container upgrades
     volumes:
       - 'etc-pihole:/etc/pihole'
@@ -20,16 +20,11 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-    secrets:
-      - pi-hole
     networks:
       - pi-hole
 
 networks:
   pi-hole:
-secrets:
-  pi-hole:
-    file: /run/secrets/pi-hole
 volumes:
   etc-pihole:
   etc-dnsmasq.d:
