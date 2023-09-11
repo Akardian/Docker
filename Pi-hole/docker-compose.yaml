@@ -27,3 +27,6 @@ services:
 
 networks:
   pi-hole:
+secrets:
+  pi-hole:
+    file: pi-hole
