@@ -29,7 +29,7 @@ networks:
   pi-hole:
 secrets:
   pi-hole:
-    external: true
+    file: /run/secrets/pi-hole
 volumes:
   etc-pihole:
   etc-dnsmasq.d:
