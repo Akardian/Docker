@@ -59,8 +59,9 @@ services:
       - home-network
 
 networks:
-  home-network:
-
+  default:
+    external: true
+    name: home-network
 
 volumes:
   data:
