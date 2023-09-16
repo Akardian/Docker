@@ -59,7 +59,7 @@ services:
       - home-network
 
 networks:
-  default:
+  home-network:
     external: true
     name: home-network
 
