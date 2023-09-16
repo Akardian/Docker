@@ -15,8 +15,8 @@ services:
       # Mysql/Maria connection parameters:
       DB_MYSQL_HOST: "maria-db"
       DB_MYSQL_PORT: 3306
-      DB_MYSQL_USER: "proxy"
-      DB_MYSQL_NAME: "proxy"
+      DB_MYSQL_USER: 'proxy'
+      DB_MYSQL_NAME: 'proxy'
       DB_MYSQL_PASSWORD__FILE: /run/secrets/MYSQL_PWD
       # Uncomment this if IPv6 is not enabled on your host
       # DISABLE_IPV6: 'true'
@@ -55,6 +55,8 @@ services:
         condition: on-failure
     ports:
       - 8081:8080
+    networks:
+      - home-network
 
 networks:
   home-network:
