@@ -23,10 +23,10 @@ services:
     secrets:
       - PIHOLE_PWD
     networks:
-      - home
+      - home-network
 
 networks:
-  pi-hole:
+  home-network:
 
 
 volumes:
