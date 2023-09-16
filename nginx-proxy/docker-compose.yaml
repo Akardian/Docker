@@ -21,8 +21,8 @@ services:
       # Uncomment this if IPv6 is not enabled on your host
       # DISABLE_IPV6: 'true'
     volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
+      - data:/data
+      - letsencrypt:/etc/letsencrypt
     secrets:
       - MYSQL_PWD
     networks:
@@ -41,7 +41,7 @@ services:
       MYSQL_DATABASE: 'proxy'
       MYSQL_USER: 'proxy'
     volumes:
-      - ./mysql:/var/lib/mysql
+      - var-lib-mysql:/var/lib/mysql
     secrets:
       - MYSQL_ROOT_PWD
       - MYSQL_PWD
@@ -50,6 +50,12 @@ services:
 
 networks:
   home-network:
+
+
+volumes:
+  data:
+  etc-letsencrypt:
+  var-lib-mysql:
 
 
 secrets:
