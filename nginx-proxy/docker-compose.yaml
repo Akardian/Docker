@@ -29,15 +29,15 @@ services:
       - home-network
 
   maria-db:
-    image: 'jc21/mariadb-aria:latest'
+    image: 'mariadb:latest'
     deploy:
       restart_policy:
         condition: on-failure
     ports:
       - '3306:3306'
     environment:
-      MYSQL_ROOT_PASSWORD__FILE: /run/secrets/MYSQL_ROOT_PWD
-      MYSQL_PASSWORD__FILE: /run/secrets/MYSQL_PWD
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/MYSQL_ROOT_PWD
+      MYSQL_PASSWORD_FILE: /run/secrets/MYSQL_PWD
       MYSQL_DATABASE: 'proxy'
       MYSQL_USER: 'proxy'
     volumes:
