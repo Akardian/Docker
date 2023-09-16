@@ -47,7 +47,7 @@ services:
       - home-network
 
 networks:
-  home:
+  home-network:
 
 
 secrets:
