@@ -22,12 +22,11 @@ services:
         condition: on-failure
     secrets:
       - PIHOLE_PWD
-    networks:
-      - home-network
 
 networks:
-  home-network:
-
+  default:
+    external: true
+    name: home-network
 
 volumes:
   etc-pihole:
