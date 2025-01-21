@@ -65,7 +65,7 @@ services:
 
 volumes:
   mealie-data:
-  mealie-pgdata
+  mealie-pgdata:
   
 secrets:
     MEALIE_POSTGRES_PWD:
