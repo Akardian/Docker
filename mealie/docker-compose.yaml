@@ -43,7 +43,6 @@ services:
       - MEALIE_SMTP_PASSWORD
 
   postgres:
-    container_name: postgres
     image: postgres:15
     volumes:
       - mealie-pgdata:/var/lib/postgresql/data
