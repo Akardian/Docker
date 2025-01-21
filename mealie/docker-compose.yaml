@@ -3,8 +3,6 @@ version: '3.8'
 services:
   mealie:
     image: ghcr.io/mealie-recipes/mealie:v2.4.2 # 
-    container_name: mealie
-    restart: always
     ports:
         - "9925:9000" # 
     deploy:
@@ -47,7 +45,6 @@ services:
   postgres:
     container_name: postgres
     image: postgres:15
-    restart: always
     volumes:
       - mealie-pgdata:/var/lib/postgresql/data
     environment:
