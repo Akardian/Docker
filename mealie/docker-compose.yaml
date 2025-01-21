@@ -1,0 +1,87 @@
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:v2.4.2 # 
+    container_name: mealie
+    restart: always
+    ports:
+        - "9925:9000" # 
+    deploy:
+      resources:
+        limits:
+          memory: 1000M # 
+    volumes:
+      - mealie-data:/app/data/
+    environment:
+      # Set Backend ENV Variables Here
+      ALLOW_SIGNUP: "false"
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/Berlin
+      BASE_URL: https://mealie.home.local
+      # Database Settings
+      DB_ENGINE: postgres
+      POSTGRES_USER: mealie
+      POSTGRES_PASSWORD: run/secrets/MEALIE_POSTGRES_PWD
+      POSTGRES_SERVER: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: mealie
+      # Default
+      DEFAULT_EMAIL: run/secrets/MEALIE_DEFAULT_MAIL
+      DEFAULT_GROUP: Home
+      DEFAULT_HOUSEHOLD: Home
+      # SMTP
+      SMTP_HOST: run/secrets/MEALIE_SMTP_HOST
+      SMTP_FROM_EMAIL: run/secrets/MEALIE_SMTP_MAIL
+      SMTP_USER: run/secrets/MEALIE_SMTP_USER
+      SMTP_PASSWORD: run/secrets/MEALIE_SMTP_PASSWORD
+    depends_on:
+      postgres:
+        condition: service_healthy
+    secrets:
+      - MEALIE_POSTGRES_PWD
+      - MEALIE_DEFAULT_MAIL
+      - MEALIE_SMTP_HOST
+      - MEALIE_SMTP_MAIL
+      - MEALIE_SMTP_USER
+      - MEALIE_SMTP_PASSWORD
+
+  postgres:
+    container_name: postgres
+    image: postgres:15
+    restart: always
+    volumes:
+      - mealie-pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: run/secrets/MEALIE_POSTGRES_PWD
+      POSTGRES_USER: mealie
+      PGUSER: mealie
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    secrets:
+      - MEALIE_POSTGRES_PWD
+
+volumes:
+  mealie-data:
+  mealie-pgdata
+  
+secrets:
+    MEALIE_POSTGRES_PWD:
+        external: true
+    MEALIE_DEFAULT_MAIL:
+        external: true
+    MEALIE_SMTP_HOST:
+        external: true
+    MEALIE_SMTP_MAIL:
+        external: true
+    MEALIE_SMTP_USER:
+        external: true
+    MEALIE_SMTP_PASSWORD:
+        external: true
+        
+networks:
+  default:
+    external: true
+    name: home-network
