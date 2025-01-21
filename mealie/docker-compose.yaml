@@ -40,6 +40,7 @@ services:
     volumes:
       - mealie-pgdata:/var/lib/postgresql/data
     environment:
+      POSTGRES_PASSWORD_FILE: run/secrets/POSTGRES_PWD
       POSTGRES_USER: mealie
       PGUSER: mealie
     healthcheck:
