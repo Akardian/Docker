@@ -36,9 +36,6 @@ services:
       SMTP_FROM_EMAIL: run/secrets/MEALIE_SMTP_MAIL
       SMTP_USER: run/secrets/MEALIE_SMTP_USER
       SMTP_PASSWORD: run/secrets/MEALIE_SMTP_PASSWORD
-    depends_on:
-      postgres:
-        condition: service_healthy
     secrets:
       - MEALIE_POSTGRES_PWD
       - MEALIE_DEFAULT_MAIL
