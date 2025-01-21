@@ -21,33 +21,25 @@ services:
       # Database Settings
       DB_ENGINE: postgres
       POSTGRES_USER: mealie
-      POSTGRES_PASSWORD: run/secrets/MEALIE_POSTGRES_PWD
       POSTGRES_SERVER: postgres
       POSTGRES_PORT: 5432
       POSTGRES_DB: mealie
       # Default
-      DEFAULT_EMAIL: run/secrets/MEALIE_DEFAULT_MAIL
       DEFAULT_GROUP: Home
       DEFAULT_HOUSEHOLD: Home
-      # SMTP
-      SMTP_HOST: run/secrets/MEALIE_SMTP_HOST
-      SMTP_FROM_EMAIL: run/secrets/MEALIE_SMTP_MAIL
-      SMTP_USER: run/secrets/MEALIE_SMTP_USER
-      SMTP_PASSWORD: run/secrets/MEALIE_SMTP_PASSWORD
     secrets:
-      - MEALIE_POSTGRES_PWD
-      - MEALIE_DEFAULT_MAIL
-      - MEALIE_SMTP_HOST
-      - MEALIE_SMTP_MAIL
-      - MEALIE_SMTP_USER
-      - MEALIE_SMTP_PASSWORD
+      - POSTGRES_PWD
+      - DEFAULT_MAIL
+      - SMTP_HOST
+      - SMTP_MAIL
+      - SMTP_USER
+      - SMTP_PASSWORD
 
   postgres:
     image: postgres:15
     volumes:
       - mealie-pgdata:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: run/secrets/MEALIE_POSTGRES_PWD
       POSTGRES_USER: mealie
       PGUSER: mealie
     healthcheck:
@@ -56,24 +48,24 @@ services:
       timeout: 20s
       retries: 3
     secrets:
-      - MEALIE_POSTGRES_PWD
+      - POSTGRES_PWD
 
 volumes:
   mealie-data:
   mealie-pgdata:
   
 secrets:
-    MEALIE_POSTGRES_PWD:
+    POSTGRES_PWD:
         external: true
-    MEALIE_DEFAULT_MAIL:
+    DEFAULT_MAIL:
         external: true
-    MEALIE_SMTP_HOST:
+    SMTP_HOST:
         external: true
-    MEALIE_SMTP_MAIL:
+    SMTP_MAIL:
         external: true
-    MEALIE_SMTP_USER:
+    SMTP_USER:
         external: true
-    MEALIE_SMTP_PASSWORD:
+    SMTP_PASSWORD:
         external: true
         
 networks:
